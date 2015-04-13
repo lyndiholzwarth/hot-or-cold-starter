@@ -21,29 +21,45 @@ $(document).ready(function(){
 		var numGuess = $('#userGuess').val();	
 		event.preventDefault();
 		console.log(numGuess)
-	});
+
 
 //evaluate user guess for closeness and give message
-	var numGuess;
+
 	var evalGuess = false;
 
+	//while(!evalGuess){
 	while(!evalGuess){
-		if (numGuess==numRand){
-	   		console.log("You Win");
-		}
-	   	else if (numGuess<numRand){
+
+	   	if (numGuess<numRand){
 	   		console.log("Lower");
-		}
+	   		evalGuess=false;
+	   		alert("Too Low. Guess again");
+		   $('#userGuess').val("");	
+		   break;
+			}
 		else if (numGuess>numRand){
 	   		console.log("Higher");
+	   		evalGuess=false;
+	   		alert("Too high. Guess again");
+		   $('#userGuess').val("");	
+		   break;
 		}
-	}  
+		else if (numGuess==numRand){
+	   		console.log("You Win");
+	   		evalGuess=true;
+	   		alert("You win!");
+	   		$('#userGuess').val("");	
+	   		break;
+		}
 
+//		else
+	}  
+});
 //add guesses to list
 
 //congrats message
 
-//new game on button press
+//new game on button press*/
 
 });
 
