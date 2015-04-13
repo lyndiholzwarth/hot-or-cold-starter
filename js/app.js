@@ -21,7 +21,7 @@ $(document).ready(function(){
 		var numGuess = $('#userGuess').val();	
 		event.preventDefault();
 		console.log(numGuess);
-		
+
 
 
 //evaluate user guess for closeness and give message
@@ -32,24 +32,22 @@ $(document).ready(function(){
 
 	while(!evalGuess){
 
-	   	if (numGuess<numRand){
-	   		console.log("Lower");
+	   	if (numGuess-numRand>=50 || numRand-numGuess>=50){
 	   		evalGuess=false;
-	   		alert("Too Low. Guess again");
-		   $('#userGuess').val("");	
+	   	//	alert("Too Low. Guess again");
+		   $('#userGuess').val("Very Cold");	
+		   break;
+		}
+		else if (numGuess-numRand>=30 || numRand-numGuess>=30){
+	   		evalGuess=false;
+	//   		alert("Too high. Guess again");
+		   $('#userGuess').val("Cold");	
 		   break;
 		}
 		else if (numGuess>numRand){
 	   		console.log("Higher");
 	   		evalGuess=false;
-	   		alert("Too high. Guess again");
-		   $('#userGuess').val("");	
-		   break;
-		}
-		else if (numGuess>numRand){
-	   		console.log("Higher");
-	   		evalGuess=false;
-	   		alert("Too high. Guess again");
+	//   		alert("Too high. Guess again");
 		   $('#userGuess').val("");	
 		   break;
 		}
