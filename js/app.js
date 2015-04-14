@@ -31,32 +31,42 @@ $(document).ready(function(){
 	var evalGuess = false;
 
 	while(!evalGuess){
-
-	   	if (numGuess-numRand>=50 || numRand-numGuess>=50){
-	   		evalGuess=false;
-	   	//	alert("Too Low. Guess again");
-		   $('#userGuess').val("Very Cold");	
-		   break;
-		}
-		else if (numGuess-numRand>=30 || numRand-numGuess>=30){
-	   		evalGuess=false;
-	//   		alert("Too high. Guess again");
-		   $('#userGuess').val("Cold");	
-		   break;
-		}
-		else if (numGuess>numRand){
-	   		console.log("Higher");
-	   		evalGuess=false;
-	//   		alert("Too high. Guess again");
-		   $('#userGuess').val("");	
-		   break;
-		}
-		else if (numGuess==numRand){
+		if (numGuess==numRand){
 	   		console.log("You Win");
 	   		evalGuess=true;
 	   		alert("You win!");
 	   		$('#userGuess').val("");	
 	   		break;
+		}
+	   	else if (numGuess-numRand>=50||numRand-numGuess>=50){
+	   		evalGuess=false;
+	   	//	alert("Too Low. Guess again");
+		   $('#userGuess').val("Very Cold");	
+		   break;
+		}
+		else if (numGuess-numRand>=30||numRand-numGuess>=30){
+	   		evalGuess=false;
+	//   		alert("Too high. Guess again");
+		   $('#userGuess').val("Cold");	
+		   break;
+		}
+		else if (numGuess-numRand>=15||numRand-numGuess>=15){
+	   		evalGuess=false;
+	//   		alert("Too high. Guess again");
+		   $('#userGuess').val("Hot");	
+		   break;
+		}
+		else if (numGuess-numRand>5||numRand-numGuess>5){
+	   		evalGuess=false;
+	//   		alert("Too high. Guess again");
+		   $('#userGuess').val("kinda Hot");	
+		   break
+		  }
+		else if (numGuess-numRand<=5||numRand-numGuess<=5){
+	   		evalGuess=false;
+	//   		alert("Too high. Guess again");
+		   $('#userGuess').val("very Hot");	
+		   break;
 		}
 
 //		else
