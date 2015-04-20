@@ -13,21 +13,31 @@ $(document).ready(function(){
   	});
 
 //randomly select number
-	var numRand = Math.floor((Math.random() * 100)+1);
-	console.log(numRand);
+	function game(){
+		numRand=Math.floor((Math.random() * 100)+1);
+		console.log("Answer " + numRand);
+	};
+
+
+//var numRand
+//var numGuess
+game();
 
 //new game on button press
 	$('.new').click(function(){
-		var numRand=Math.floor((Math.random() * 101)+1);
-		console.log(numRand);
-	//    $('#guessList').reset( );
-	 //   $('#count')
+		game()
+	   $('#guessList').empty();
+	   $('#count').remove();
+	//var counter=0;
+	console.log($('#count'));
+	// document.getElementById('count').reset();
 //not resetting comparision commands*****************
 	});
 
 
 //accept user guess
 	$( "form" ).on( 'click', '#guessButton', function( event ) {
+//		numRand;
 		var numGuess = $('#userGuess').val();	
 		event.preventDefault();
 		console.log(numGuess);
