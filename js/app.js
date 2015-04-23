@@ -12,26 +12,22 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-//randomly select number
-	function game(){
+//ew game function
+	function newGame(){
 		numRand=Math.floor((Math.random() * 100)+1);
 		console.log("Answer " + numRand);
+		$('#guessList').empty();
+	   	var counter = document.getElementById('count');
+    	counter.innerHTML = 0;
+    	$('#userGuess').attr("placeholder", "Enter your Guess").val("");
 	};
 
 
-//var numRand
-//var numGuess
-game();
+newGame();
 
 //new game on button press
 	$('.new').click(function(){
-		game()
-	   $('#guessList').empty();
-	   $('#count').remove();
-	//var counter=0;
-	console.log($('#count'));
-	// document.getElementById('count').reset();
-//not resetting comparision commands*****************
+		newGame()
 	});
 
 
@@ -54,7 +50,24 @@ game();
 		var evalGuess = false;
 
 		while(!evalGuess){
-			if (numGuess==numRand){
+//test for real number
+		if (isNaN(numGuess)==true){
+			alert("Sorry, I need a real number. Please try again.");
+			$('#userGuess').attr("placeholder", "Enter your Guess").val("");	
+			break;
+			//maxNumber= false;
+		}
+
+		//test for decimal
+		else if (numGuess % 1 != 0){
+			alert("Sorry, I need a whole number. Please try again.");
+			$('#userGuess').attr("placeholder", "Enter your Guess").val("");	
+			break;
+		}
+
+
+//continue if real number
+			else if (numGuess==numRand){
 		   		console.log("You Win");
 		   		evalGuess=true;
 		   //		alert("You win!");
@@ -64,31 +77,31 @@ game();
 		   	else if (numGuess-numRand>=50||numRand-numGuess>=50){
 		   		evalGuess=false;
 		   	//	alert("Too Low. Guess again");
-			   $('#userGuess').val("Freezing");	
+			   $('#userGuess').attr("placeholder", "Freezing!").val("");	
 			   break;
 			}
 			else if (numGuess-numRand>=30||numRand-numGuess>=30){
 		   		evalGuess=false;
 		//   		alert("Too high. Guess again");
-			   $('#userGuess').val("Cold");	
+			   $('#userGuess').attr("placeholder", "Cold").val("");	
 			   break;
 			}
 			else if (numGuess-numRand>=15||numRand-numGuess>=15){
 		   		evalGuess=false;
 		//   		alert("Too high. Guess again");
-			   $('#userGuess').val("Warmer");	
+			   $('#userGuess').attr("placeholder", "Warmer").val("");	
 			   break;
 			}
 			else if (numGuess-numRand>5||numRand-numGuess>5){
 		   		evalGuess=false;
 		//   		alert("Too high. Guess again");
-			   $('#userGuess').val("Hot");	
+			   $('#userGuess').attr("placeholder", "Hot").val("");	
 			   break
 			  }
 			else if (numGuess-numRand<=5||numRand-numGuess<=5){
 		   		evalGuess=false;
 		//   		alert("Too high. Guess again");
-			   $('#userGuess').val("Burning!");	
+			   $('#userGuess').attr("placeholder", "Burning!").val("");	
 			   break;
 			}
 		} 
