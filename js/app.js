@@ -44,9 +44,14 @@ $(document).ready(function(){
 		var counter = document.getElementById('count');
     	counter.innerHTML++;
 
+// add items into an array
+		var yourGuess = [numRand];
+			yourGuess.push(numGuess);
+
 //evaluate user guess for closeness and give message
 		var evalGuess = false;
 		while(!evalGuess){
+// run this every guess
 			//test for real number
 			if (isNaN(numGuess)==true){
 				alert("Sorry, I need a real number. Please try again.");
@@ -67,7 +72,8 @@ $(document).ready(function(){
 				break;
 			}
 
-//continue if real number
+//continue if real number 
+// run this for first guess only
 			else if (numGuess==numRand){
 		   		console.log("You Win");
 		   		evalGuess=true;
@@ -75,33 +81,51 @@ $(document).ready(function(){
 		   		$('#userGuess').val("You Win!");	
 		   		break;
 			}
-		   	else if (numGuess-numRand>=50||numRand-numGuess>=50){
+		   	else if (Math.abs(numGuess-numRand)>=50){
 		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Freezing!").val("");	
 			   break;
 			}
-			else if (numGuess-numRand>=30||numRand-numGuess>=30){
+			else if (Math.abs(numGuess-numRand)>=30){
 		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Cold").val("");	
 			   break;
 			}
-			else if (numGuess-numRand>=15||numRand-numGuess>=15){
+			else if (Math.abs(numGuess-numRand)>=15){
 		   		evalGuess=false;
-			   $('#userGuess').attr("placeholder", "Warmer").val("");	
+			   $('#userGuess').attr("placeholder", "Warm").val("");	
 			   break;
 			}
-			else if (numGuess-numRand>5||numRand-numGuess>5){
+			else if (Math.abs(numGuess-numRand)>5){
 		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Hot").val("");	
 			   break
 			  }
-			else if (numGuess-numRand<=5||numRand-numGuess<=5){
+			else if (Math.abs(numGuess-numRand)<=5){
 		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Burning!").val("");	
 			   break;
 			}
-		} 
+		}
+			console.log("array:" + yourGuess);
+
 	});
+	
+// run this for all subsequent guesses
+//	if Math.abs(numGuessA-numRand) < Math.abs(numGuessB-numRand){
+//		$('#userGuess').attr("placeholder", "Warmer").val("");	
+//		break;
+//	}
+
+//	else if Math.abs(numGuessA-numRand) > Math.abs(numGuessB-numRand){
+//		$('#userGuess').attr("placeholder", "Cooler").val("");	
+//		break;
+//	}
+
+
+// compare items in the array
+
+// how to run different options for different guesses
 
 });
 
