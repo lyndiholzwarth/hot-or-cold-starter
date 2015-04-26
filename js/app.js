@@ -21,6 +21,7 @@ $(document).ready(function(){
     	counter.innerHTML = 0;
     	$('#userGuess').attr("placeholder", "Enter your Guess").val("");
     	var yourGuess=[];
+    	guessEnters=1;
 	};
 
 	//new game on initial load
@@ -32,7 +33,7 @@ $(document).ready(function(){
 	});
 
 	//accept user guess
-	var guessEnters = 1;
+	//var guessEnters = 1;
 	$( "form" ).on( 'click', '#guessButton', function( event ) {
 		event.preventDefault();
 		numGuess = $('#userGuess').val();	
@@ -159,12 +160,13 @@ function judgeGuess() {
 
 			else{
 				evalGuess=false;
-				yourGuess.push(Math.abs(numGuess-numRand));
+				yourGuess.splice(0,0,(Math.abs(numGuess-numRand)));
 		 		console.log("array:" + yourGuess);
 		 		guessCompare();
 		        guessEnters++;
 		        break;
 		       }
+
 	    }
     }
 
@@ -213,9 +215,13 @@ function judgeGuess() {
 };
 
 	function guessCompare(){
-		if (Math.abs(numGuess-numRand)<3){
-			   $('#userGuess').attr("placeholder", "Burning!").val("");	
-			}
+		if (yourGuess[0]==yourGuess[1]){
+			$('#userGuess').attr("placeholder", "Same guess").val("");	
+		}
+
+		else if (yourGuess[0]==1){
+			$('#userGuess').attr("placeholder", "Burning!").val("");	
+		}
 
 		else if (yourGuess[0]<yourGuess[1]){
 			$('#userGuess').attr("placeholder", "Warmer").val("");	
