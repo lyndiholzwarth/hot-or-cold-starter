@@ -33,7 +33,6 @@ $(document).ready(function(){
 	});
 
 	//accept user guess
-	//var guessEnters = 1;
 	$( "form" ).on( 'click', '#guessButton', function( event ) {
 		event.preventDefault();
 		numGuess = $('#userGuess').val();	
@@ -49,168 +48,80 @@ $(document).ready(function(){
 
     	//evaluate user guess for closeness and give message
 		judgeGuess();
-
-		// // add items into an array
-		// var yourGuess = [numRand];
-		// yourGuess.push(numGuess);
- 	// 	console.log("array:" + yourGuess);
 	});
-
-
 //evaluate guess function
 function judgeGuess() {
-    if ( guessEnters == 1 ) {
- 		var evalGuess = false;
-		while(!evalGuess){
+	 var evalGuess = false;
 
-			//test for real number
-			if (isNaN(numGuess)==true){
-				alert("Sorry, I need a real number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
+	//test for real number
+	if (isNaN(numGuess)==true){
+		alert("Sorry, I need a real number. Please try again.");
+		$('#userGuess').attr("placeholder", "Enter your Guess").val("");
+		evalGuess=true;	
+	}
 
-			//test for decimal
-			else if (numGuess % 1 != 0){
-				alert("Sorry, I need a whole number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-			//test for enmpy field
-			else if (numGuess === ""){
-				alert("Sorry, I didn't catch that. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-			//continue if real number 
-			else if (numGuess==numRand){
-		   		console.log("You Win");
-		   		evalGuess=true;
-		   		alert("You win!");
-		   		$('#userGuess').val("You Win!");
-		   		yourGuess.length = 0;	
-		   		break;
-			}
+	//test for decimal
+	else if (numGuess % 1 != 0){
+		alert("Sorry, I need a whole number. Please try again.");
+		$('#userGuess').attr("placeholder", "Enter your Guess").val("");
+		evalGuess=true;
+	}
+	//test for enmpy field
+	else if (numGuess === ""){
+		alert("Sorry, I didn't catch that. Please try again.");
+		$('#userGuess').attr("placeholder", "Enter your Guess").val("");
+		evalGuess=true;
+	}
 
+	//continue if real number 
+	if (numGuess==numRand){
+   		console.log("You Win");
+   		alert("You win!");
+   		$('#userGuess').val("You Win!");
+   		yourGuess.length = 0;	
+   		evalGuess=true;
+	}
+
+	if ( guessEnters == 1 ) {
+		while(!evalGuess){	
 			// run this for first guess only
-		   	else if (Math.abs(numGuess-numRand)>=50){
-		   		evalGuess=false;
+		   	if (Math.abs(numGuess-numRand)>=50){
 			   $('#userGuess').attr("placeholder", "Freezing!").val("");	
-			   break;
+   				evalGuess=true;
 			}
 			else if (Math.abs(numGuess-numRand)>=30){
-		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Cold").val("");	
-			   break;
+			   evalGuess=true;
 			}
 			else if (Math.abs(numGuess-numRand)>=15){
-		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Warm").val("");	
-			   break;
+			   evalGuess=true;
 			}
 			else if (Math.abs(numGuess-numRand)>5){
-		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Hot").val("");	
-			   break
+			   evalGuess=true
 			  }
 			else if (Math.abs(numGuess-numRand)<=5){
-		   		evalGuess=false;
 			   $('#userGuess').attr("placeholder", "Burning!").val("");	
-			   break;
+			   evalGuess=true;
 			}
 		};
 		// add items into an array
 		yourGuess1 = Math.abs(numGuess-numRand);
 		yourGuess = [yourGuess1];
         console.log("First guess");
-        guessEnters=2;
+        guessEnters++;
     }
 
-//second guess
-   else if ( guessEnters == 2 ) {
-    	while(!evalGuess){
-			//test for real number
-			if (isNaN(numGuess)==true){
-				alert("Sorry, I need a real number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-
-			//test for decimal
-			else if (numGuess % 1 != 0){
-				alert("Sorry, I need a whole number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-			//test for enmpy field
-			else if (numGuess === ""){
-				alert("Sorry, I didn't catch that. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}	
-			//continue if real number 
-			else if (numGuess==numRand){
-		   		console.log("You Win");
-		   		evalGuess=true;
-		   		alert("You win!");
-		   		$('#userGuess').val("You Win!");	
-		   		yourGuess.length = 0;
-		   		break;
-			}
-
-			else{
-				evalGuess=false;
-				yourGuess.splice(0,0,(Math.abs(numGuess-numRand)));
-		 		console.log("array:" + yourGuess);
-		 		guessCompare();
-		        guessEnters++;
-		        break;
-		       }
-
-	    }
-    }
-
-//additional guess
+	//additional guess
    else {
-    	while(!evalGuess){
-			//test for real number
-			if (isNaN(numGuess)==true){
-				alert("Sorry, I need a real number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-
-			//test for decimal
-			else if (numGuess % 1 != 0){
-				alert("Sorry, I need a whole number. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}
-			//test for enmpy field
-			else if (numGuess === ""){
-				alert("Sorry, I didn't catch that. Please try again.");
-				$('#userGuess').attr("placeholder", "Enter your Guess").val("");
-				break;	
-			}	
-			//continue if real number 
-			else if (numGuess==numRand){
-		   		console.log("You Win");
-		   		evalGuess=true;
-		   		alert("You win!");
-		   		$('#userGuess').val("You Win!");	
-		   		yourGuess.length = 0;
-		   		break;
-			}
-
-			else{
-				evalGuess=false;
-				yourGuess.splice(0,0,(Math.abs(numGuess-numRand)));
-		 		console.log("array:" + yourGuess);
-		 		guessCompare();
-		        guessEnters++;
-		        break;
-		       }
-	    }
+		while(!evalGuess){	
+			yourGuess.splice(0,0,(Math.abs(numGuess-numRand)));
+	 		console.log("array:" + yourGuess);
+	 		guessCompare();
+	        guessEnters++;
+	       	evalGuess=true;
+		}
     }
 };
 
